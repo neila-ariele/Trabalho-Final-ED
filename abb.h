@@ -5,7 +5,7 @@
 
 int tam_abb = 0;
 
-typedef struct Vertice { // Dados que cada vertice vai ter
+typedef struct Vertice { 
     int id;
     char *nome_aluno;
     int matricula;
@@ -14,21 +14,21 @@ typedef struct Vertice { // Dados que cada vertice vai ter
     struct Vertice *dir;
 } VERTICE;
 
-VERTICE *raiz = NULL; // Arvore vazia
+VERTICE *raiz = NULL; 
 
-int gera_id() {// Função para gerar um identificador unico para cada vertice da arvore. Impede que dois Nos tenha o mesmo identificador.
+int gera_id() {
     int id;
     if(tam_abb==0){
         id = 1000;
-    }else if((tam_abb%2) == 0){ // Caso seja par(direita)
+    }else if((tam_abb%2) == 0){ 
         srand( (unsigned)time(NULL));
         id =rand() % 1000;
-    }else{ // caso seja ímpar(esquerda)
+    }else{
         srand( (unsigned)time(NULL));
         id = 1001 + ( rand() % 999 );
     }
     return id;
-}; // Retorna sempre um inteiro.
+};
 
 VERTICE *buscar_add(int id, VERTICE *aux_add) {
     if (aux_add != NULL) {
@@ -56,10 +56,10 @@ void add_abb(int id, char *nome_aluno, int matricula, char *descricao) {
 
     VERTICE *aux = buscar_add(id, raiz);
 
-    if (aux != NULL && aux->id == id) { // No ja existe, não pode ser inserido.
+    if (aux != NULL && aux->id == id) { 
         printf("Insercao invalida!\n");
     } else {
-        VERTICE *novo = malloc(sizeof(VERTICE));// Espaço para gerar novo vertice
+        VERTICE *novo = malloc(sizeof(VERTICE));
         novo->id = id;
         novo->nome_aluno = nome_aluno;
         novo->matricula = matricula;
@@ -67,13 +67,13 @@ void add_abb(int id, char *nome_aluno, int matricula, char *descricao) {
         novo->esq = NULL;
         novo->dir = NULL;
 
-        if (aux == NULL) {// Arvore vazia
+        if (aux == NULL) {
             raiz = novo;
-        } else {// Existe No
+        } else {// 
             if (id < aux->id) {
-                aux->esq = novo; //Insere na esquerda
+                aux->esq = novo;
             } else {
-                aux->dir = novo;//Insere na direita
+                aux->dir = novo;
             }
         }
         tam_abb++;
